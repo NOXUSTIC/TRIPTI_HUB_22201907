@@ -1,0 +1,56 @@
+-- SQL Queries used in the project:
+
+-- Check if email exists in admin table
+SELECT * FROM admin WHERE email = ?;
+
+-- Check if email exists in students table
+SELECT * FROM students WHERE email = ?;
+
+-- Insert new admin
+INSERT INTO admin (name, email, roomNumber, dormName, password) VALUES (?, ?, ?, ?, ?);
+
+-- Insert new student
+INSERT INTO students (name, studentId, dormName, roomNumber, email, password) VALUES (?, ?, ?, ?, ?, ?);
+
+-- Update student password
+UPDATE students SET password = ? WHERE email = ?;
+
+-- Count total students
+SELECT COUNT(*) AS count FROM students;
+
+-- Create months table if not exists
+CREATE TABLE IF NOT EXISTS months (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  month_name VARCHAR(20) NOT NULL UNIQUE,
+  token_allocation INT NOT NULL DEFAULT 400
+);
+
+-- Select months
+SELECT month_name, token_allocation FROM months;
+
+-- Count months
+SELECT COUNT(*) AS count FROM months;
+
+-- Insert months
+INSERT INTO months (month_name, token_allocation) VALUES (?, ?);
+
+-- Delete all months (reset)
+DELETE FROM months;
+
+-- Count logged-in students
+SELECT COUNT(DISTINCT student_id) AS count FROM student_data WHERE logged_in = 1;
+
+-- Sum tokens used
+SELECT SUM(tokens_confirmed) AS totalTokensUsed FROM Food_table;
+
+-- Orders summary
+SELECT
+  SUM(CASE WHEN item = 'Chicken' THEN quantity ELSE 0 END) AS chickenOrder,
+  SUM(CASE WHEN item = 'Beef' THEN quantity ELSE 0 END) AS beefOrder,
+  SUM(CASE WHEN item = 'Mutton' THEN quantity ELSE 0 END) AS muttonOrder,
+  SUM(CASE WHEN item = 'Fish' THEN quantity ELSE 0 END) AS fishOrder,
+  SUM(CASE WHEN item = 'Duck' THEN quantity ELSE 0 END) AS duckOrder
+FROM Food_table;
+
+-- Count signed-up students
+SELECT COUNT(*) AS count FROM students;
