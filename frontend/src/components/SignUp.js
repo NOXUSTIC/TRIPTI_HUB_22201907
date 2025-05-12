@@ -16,7 +16,7 @@ const SignUp = () => {
   const [error, setError] = useState('');
 
   const dormOptions = [
-    'Dhanshir',
+    'Dhanshiri',
     'Chayaneer',
     'Mayurpankhi',
     'Dhrubotara',
@@ -26,36 +26,9 @@ const SignUp = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === 'roomNumber') {
-      // Validate roomNumber format and range
-      // Allowed formats: N-100 to N-1100 and M-100 to M-1100
-      const match = value.match(/^([NM])-(\d{3,4})$/);
-      if (value === '' || (match && match[1] && match[2])) {
-        if (match) {
-          const prefix = match[1];
-          const num = parseInt(match[2], 10);
-          if (
-            (prefix === 'N' && num >= 100 && num <= 1100) ||
-            (prefix === 'M' && num >= 100 && num <= 1100)
-          ) {
-            setFormData({ ...formData, [name]: value });
-            setError('');
-          } else {
-            setError('Room number must be between N-100 to N-1100 or M-100 to M-1100');
-          }
-        } else if (value === '') {
-          setFormData({ ...formData, [name]: value });
-          setError('');
-        } else {
-          setError('Room number format must be N-xxx or M-xxx');
-        }
-      } else {
-        setError('Room number format must be N-xxx or M-xxx');
-      }
-    } else {
-      setFormData({ ...formData, [name]: value });
-      setError('');
-    }
+    // Remove validation logic for roomNumber
+    setFormData({ ...formData, [name]: value });
+    setError('');
   };
 
   const handleSignUp = async (e) => {
